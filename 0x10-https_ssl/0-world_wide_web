@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 # Configure domain name zone and create subdomain that points to the load-balance
 
-get_record_info() {
-	local domain="$1"
-	local subdomain="$2"
+subdomains_all=( "www" "lb-01" "web-01" "web-02" )
 
-	if [[ -z "$subdomain" ]]; then
-		subdomains=("www" "lb-01" "web-01" "web-02")
-	else
-		subdomains=("$subdomain")
-	fi
+runDig () {
+    subdomain=$1
+    domain=$2
 
-	for sub in "${subdomains[@]}"; do
-		record_type=$(dig +short "$sub"."$domain" | awk 'NR==1{print $4}')
-		destination=$(dig +short "$sub"."$domain" | awk 'NR==1{print $1}')
-
-		if [[ -n "$record_type" && -n "$destination" ]]; then
-			echo "The subdomain $sub is a $record_type record and points to $destination"
-		fi
-	done
+    dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:' | tail -1 | awk -v s="$subdomain" 'BEGIN { FS = " " } ; { print "The subdomain " s " is a " $4 " record and points to " $5 }'
 }
-get_record_info "$@"
+
+if [ $# -eq 1 ]; then
+    domain="$1"
+    for i in "${subdomains_all[@]}"
+    do
+	runDig "$i" "$domain"
+    done
+elif [ $# -eq 2 ]; then
+    domain="$1"
+    subdomain="$2"
+    runDig "$subdomain" "$domain"
+fi

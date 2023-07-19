@@ -17,3 +17,4 @@ server-id = 2
 relay-log = /var/log/mysql/mysql-relay-bin.log
 log_bin = /var/log/mysql/mysql-bin.log
 read_only = 1
+binlog_do_db    = tyrell_corp

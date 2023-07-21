@@ -2,4 +2,4 @@
 # script that accepts one argument
 # the script should run the whoami command under the user passed
 
-sudo -u "$1" whoami
+su "$1" -s /bin/bash -c "whoami"

@@ -18,6 +18,6 @@ def recurse(subreddit, hot_list=[], after=None):
         after = response.json().get('data').get('after')
         if after is None:
             return hot_list
-        return resurse(subreddit, hot_list, after)
+        return recurse(subreddit, hot_list, after)
     else:
         return None

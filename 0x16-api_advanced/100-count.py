@@ -3,7 +3,7 @@
 import requests
 
 
-def count_words(subreddit, word_list, instance={}, count=0, after=None):
+def count_words(subreddit, word_list, instances={}, after="", count=0):
     """Queries the Reddit API, parses the title of all hot
     articles, and prints a sorted count of given keywords"""
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)

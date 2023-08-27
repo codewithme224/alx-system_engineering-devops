@@ -1,5 +1,5 @@
 
-es Wiped Out: A Tale of Cache Catastrophe and CPU Capers
+Web Woes Wiped Out: A Tale of Cache Catastrophe and CPU Capers
 
 Issue Summary:
 Duration: August 15, 2023, 08:00 AM - August 15, 2023, 10:30 AM (UTC)
